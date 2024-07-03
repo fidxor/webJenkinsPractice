@@ -39,7 +39,7 @@ pipeline {
                         sh 'git config --global user.email "fidxordl5404@gmail.com"' // 사용자 이메일 설정
 
                         // 타겟 저장소 클론
-                        sh 'git clone https://$GIT_TOKEN_USR:$GIT_TOKEN_PSW@$TARGET_REPO_URL target-repo'
+                        sh 'git clone $GIT_TOKEN_USR:$GIT_TOKEN_PSW@$TARGET_REPO_URL target-repo'
 
                         // 파일 복사 및 커밋
                         sh "sed -i 's|image: fidxor/pythonweb:[^ ]*|image: fidxor/pythonweb:$BUILD_NUMBER|' target-repo/pythonweb/deployment.yml"
