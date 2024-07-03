@@ -1,4 +1,10 @@
 pipeline {
+    environment {
+        REPOSITORY = "fidxor/pythonweb"
+        DOCKERHUB_CREDENTIALS = credentials('fidxor')
+        dockerImage = ''
+    }
+       
     agent any
 
     stages {
