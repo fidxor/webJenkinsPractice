@@ -48,10 +48,12 @@ pipeline {
                                 sh 'git clone https://$TARGET_REPO_URL target-repo'
 
                                 sh "sed -i 's|image: fidxor/pythonweb:[^ ]*|image: fidxor/pythonweb:$BUILD_NUMBER|' target-repo/pythonweb/deployment.yml"
-
-                                sh 'git add .'
-                                sh 'git commit -m "update deployment image version $BUILD_NUMBER"'
-                                sh 'git push https://${gitUsername}:${gitPassword}@$TARGET_REPO_URL'                                                    
+                                dir('target-repo') {
+                                    sh 'git add .'
+                                    sh 'git commit -m "update deployment image version $BUILD_NUMBER"'
+                                    sh 'git push https://${gitUsername}:${gitPassword}@$TARGET_REPO_URL'
+                                }
+                                
                             }
                         }                        
                         // // 환경 설정
