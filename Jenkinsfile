@@ -34,10 +34,10 @@ pipeline {
             stage("Commit and Push to Another Repo") {
                 steps {
                     script {
-                        sh echo $GIT_CREDENTIALS_USR
-                        sh echo $GIT_CREDENTIALS_PSW
-                        sh echo $DOCKERHUB_CREDENTIALS_USR
-                        sh echo $DOCKERHUB_CREDENTIALS_PSW
+                        sh 'echo $GIT_CREDENTIALS_USR | cat'
+                        sh 'echo $GIT_CREDENTIALS_PSW | cat'
+                        sh 'echo $DOCKERHUB_CREDENTIALS_USR | cat'
+                        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | cat'
                         // // 환경 설정
                         // sh 'git config --global user.name "fidxor"' // 사용자 이름 설정
                         // sh 'git config --global user.email "fidxordl5404@gmail.com"' // 사용자 이메일 설정
