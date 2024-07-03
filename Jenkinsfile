@@ -33,11 +33,11 @@ pipeline {
                 steps {
                     sh 'docker rmi $REPOSITORY:$BUILD_NUMBER'
                 }
-            }
-            post {
-                always {
-                    emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
-                }
+            }            
+        }
+        post {
+            always {
+                emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
             }
         }
 }
