@@ -2,7 +2,7 @@ pipeline {
     environment {
         REPOSITORY = "fidxor/pythonweb"
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-fidxor')
-        GIT_TOKEN = credentials('14ca764d-4b1c-4ede-9ad0-4ed68354deda') // Git 토큰 자격 증명 ID로 교체하세요
+        GIT_TOKEN = credentials('githubcredential') // Git 토큰 자격 증명 ID로 교체하세요
         TARGET_REPO_URL = 'github.com/fidxor/argocdJenkinsPractice.git'
         dockerImage = ''
     }
