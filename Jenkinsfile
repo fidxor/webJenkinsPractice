@@ -35,8 +35,8 @@ pipeline {
                 steps {
                     script {
                         // 환경 설정
-                        sh 'git config --global user.name "Your Name"' // 사용자 이름 설정
-                        sh 'git config --global user.email "your-email@example.com"' // 사용자 이메일 설정
+                        sh 'git config --global user.name "fidxor"' // 사용자 이름 설정
+                        sh 'git config --global user.email "fidxordl5404@gmail.com"' // 사용자 이메일 설정
 
                         // 타겟 저장소 클론
                         sh 'git clone https://$GIT_TOKEN_USR:$GIT_TOKEN_PSW@$TARGET_REPO_URL target-repo'
