@@ -3,7 +3,7 @@ pipeline {
         REPOSITORY = "fidxor/pythonweb"
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-fidxor')
         GIT_TOKEN = credentials('14ca764d-4b1c-4ede-9ad0-4ed68354deda') // Git 토큰 자격 증명 ID로 교체하세요
-        TARGET_REPO_URL = 'https://github.com/fidxor/argocdJenkinsPractice.git'
+        TARGET_REPO_URL = 'github.com/fidxor/argocdJenkinsPractice.git'
         dockerImage = ''
     }
 
@@ -46,14 +46,14 @@ pipeline {
                         '''
 
                         // 타겟 저장소 클론
-                        sh 'git clone $TARGET_REPO_URL target-repo'
+                        sh 'git clone https://$GIT_CREDENTIALS_USR:$GIT_CREDENTIALS_PSW@$TARGET_REPO_URL target-repo'
 
                         // 파일 변경 및 커밋
                         sh "sed -i 's|image: fidxor/pythonweb:[^ ]*|image: fidxor/pythonweb:$BUILD_NUMBER|' target-repo/pythonweb/deployment.yml"
                         dir('target-repo') {
                             sh 'git add .'
                             sh 'git commit -m "update deployment image version $BUILD_NUMBER"'
-                            sh 'git push https://$GIT_CREDENTIALS_USR:$GIT_CREDENTIALS_PSW@$TARGET_REPO_URL'
+                            sh 'git push origin main'
                         }
                     }
                 }
