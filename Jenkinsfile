@@ -48,13 +48,15 @@ pipeline {
                         // 타겟 저장소 클론
                         sh 'git clone $TARGET_REPO_URL target-repo'
 
-                        // 파일 복사 및 커밋
+                        // 파일 변경 및 커밋
                         sh "sed -i 's|image: fidxor/pythonweb:[^ ]*|image: fidxor/pythonweb:$BUILD_NUMBER|' target-repo/pythonweb/deployment.yml"
                         dir('target-repo') {
                             sh 'git add .'
                             sh 'git commit -m "update deployment image version $BUILD_NUMBER"'
-                            // sh 'git push $GIT_CREDENTIALS_USR:$GIT_CREDENTIALS_PSW@$TARGET_REPO_URL'
-                            sh 'git push $TARGET_REPO_URL'
+                            // 자격 증명 정보를 환경 변수에 저장
+                            withCredentials([usernamePassword(credentialsId: 'git-token-id', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
+                            // git push 수행
+                            sh 'git push https://$GIT_USER:$GIT_PASS@$TARGET_REPO_URL'
                         }
                     }
                 }
