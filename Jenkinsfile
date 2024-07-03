@@ -1,12 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        REPOSITORY = "fidxor/pythonweb"
-        DOCKERHUB_CREDENTIALS = credentials('fidxor')
-        dockerImage = ''
-    }
-
     stages {
         stage("Checkout") {
 			steps {
@@ -15,19 +9,47 @@ pipeline {
 		}
         stage("build") {
             steps {
-                sh 'docker build -t fidxor/pythonweb:$BUILD_NUMBER .'
-
-            }
-        }
-        stage("login") {
-            steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh 'docker build -t fidxor/pythonweb:0.2 .'
             }
         }
         stage("deploy") {
             steps {
-                sh 'docker push $REPOSITORY:$BUILD_NUMBER'
+                sh 'docker push fidxor/pythonweb:0.2'
             }
         }
     }
 }
+
+// pipeline {
+//     agent any
+
+//     environment {
+//         REPOSITORY = "fidxor/pythonweb"
+//         DOCKERHUB_CREDENTIALS = credentials('fidxor')
+//         dockerImage = ''
+//     }
+
+//     stages {
+//         stage("Checkout") {
+// 			steps {
+// 				checkout scm
+// 			}
+// 		}
+//         stage("build") {
+//             steps {
+//                 sh 'docker build -t fidxor/pythonweb:$BUILD_NUMBER .'
+
+//             }
+//         }
+//         stage("login") {
+//             steps {
+//                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+//             }
+//         }
+//         stage("deploy") {
+//             steps {
+//                 sh 'docker push $REPOSITORY:$BUILD_NUMBER'
+//             }
+//         }
+//     }
+// }
