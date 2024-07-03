@@ -15,7 +15,7 @@ pipeline {
             }
             stage("build") {
                 steps {
-                    sh 'docker build -t fidxor/pythonweb:$BUILD_NUMBER .'
+                    sh 'docker build -t $REPOSITORY:$BUILD_NUMBER .'
 
                 }
             }
@@ -32,6 +32,11 @@ pipeline {
             stage("cleaning up") {
                 steps {
                     sh 'docker rmi $REPOSITORY:$BUILD_NUMBER'
+                }
+            }
+            post {
+                always {
+                    emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
                 }
             }
         }
