@@ -53,7 +53,8 @@ pipeline {
                         dir('target-repo') {
                             sh 'git add .'
                             sh 'git commit -m "update deployment image version $BUILD_NUMBER"'
-                            sh 'git push $GIT_CREDENTIALS_USR:$GIT_CREDENTIALS_PSW@$TARGET_REPO_URL'
+                            // sh 'git push $GIT_CREDENTIALS_USR:$GIT_CREDENTIALS_PSW@$TARGET_REPO_URL'
+                            sh 'git push $TARGET_REPO_URL'
                         }
                     }
                 }
