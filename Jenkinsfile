@@ -53,11 +53,7 @@ pipeline {
                         dir('target-repo') {
                             sh 'git add .'
                             sh 'git commit -m "update deployment image version $BUILD_NUMBER"'
-                            // 자격 증명 정보를 환경 변수에 저장
-                        withCredentials([usernamePassword(credentialsId: 'git-token-id', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
-                            // git push 수행
-                            sh 'git push https://$GIT_USER:$GIT_PASS@$TARGET_REPO_URL'
-                            }
+                            sh 'git push https://$GIT_CREDENTIALS_USR:$GIT_CREDENTIALS_PSW@$TARGET_REPO_URL'
                         }
                     }
                 }
