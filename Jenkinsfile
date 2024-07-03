@@ -34,8 +34,8 @@ pipeline {
             stage("Commit and Push to Another Repo") {
                 steps {
                     script {
-                        sh 'echo $GIT_CREDENTIALS_USR | cat'
-                        sh 'echo $GIT_CREDENTIALS_PSW | cat'
+                        sh 'echo $GITHUB_CREDENTIALS_USR | cat'
+                        sh 'echo $GITHUB_CREDENTIALS_PSW | cat'
                         sh 'echo $DOCKERHUB_CREDENTIALS_USR | cat'
                         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | cat'
                         // // 환경 설정
